@@ -1,0 +1,11 @@
+[
+  {
+    "AccessKeyId": "AKIAIOSFODNN7EXAMPLE",
+    "UserName": "support-bot",
+    "AccessKeyLastUsed": {
+      "LastUsedDate": "2026-06-01T09:00:00Z",
+      "ServiceName": "ses",
+      "Region": "ap-southeast-2"
+    }
+  }
+]

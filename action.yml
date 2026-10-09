@@ -1,0 +1,113 @@
+name: agent-off-switch
+description: Review AI agent identities from saved Microsoft Entra, AWS and GitHub exports, upload SARIF, and fail on unreviewed drift.
+author: Muhammad Basit Ali
+branding:
+  icon: power
+  color: red
+
+inputs:
+  exports:
+    description: Folder of saved exports (see docs/exports.md in this repository).
+    required: true
+  baseline:
+    description: Earlier inventory JSON (aos inventory --format json) to compare with. Leave empty to skip the drift check.
+    required: false
+    default: ""
+  accept:
+    description: File of reviewed drift changes, one key per line.
+    required: false
+    default: ""
+  fail-on:
+    description: "Fail when a review finding is at or above this level: none, note, warning or error."
+    required: false
+    default: error
+  as-of:
+    description: Date the exports are judged against (YYYY-MM-DD). Empty means today.
+    required: false
+    default: ""
+  sarif-file:
+    description: Where to write the SARIF report.
+    required: false
+    default: aos.sarif
+  upload-sarif:
+    description: Upload the SARIF report to GitHub code scanning (needs security-events write).
+    required: false
+    default: "true"
+  python-version:
+    description: Python used to run aos.
+    required: false
+    default: "3.12"
+
+outputs:
+  review-exit-code:
+    description: Exit code of aos review (0 nothing at or above fail-on, 1 findings, 2 bad input).
+    value: ${{ steps.review.outputs.code }}
+  drift-exit-code:
+    description: Exit code of aos drift (0 no unreviewed change, 1 unreviewed changes, 2 bad input), empty when skipped.
+    value: ${{ steps.drift.outputs.code }}
+  sarif-file:
+    description: Path of the SARIF report.
+    value: ${{ inputs.sarif-file }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Install agent-off-switch from this action's own checkout
+      shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+      run: python -m pip install --disable-pip-version-check --quiet "$ACTION_PATH"
+    - name: aos review
+      id: review
+      shell: bash
+      env:
+        EXPORTS: ${{ inputs.exports }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        AS_OF: ${{ inputs.as-of }}
+        SARIF: ${{ inputs.sarif-file }}
+      run: |
+        args=()
+        if [ -n "$AS_OF" ]; then args+=(--as-of "$AS_OF"); fi
+        set +e
+        aos review "$EXPORTS" "${args[@]}" --fail-on "$FAIL_ON" --format sarif --out "$SARIF"
+        code=$?
+        aos review "$EXPORTS" "${args[@]}" --fail-on none >> "$GITHUB_STEP_SUMMARY"
+        set -e
+        echo "code=$code" >> "$GITHUB_OUTPUT"
+        if [ "$code" = "2" ]; then echo "::error::aos review could not read the exports"; exit 2; fi
+    - name: aos drift
+      id: drift
+      if: inputs.baseline != ''
+      shell: bash
+      env:
+        EXPORTS: ${{ inputs.exports }}
+        BASELINE: ${{ inputs.baseline }}
+        ACCEPT: ${{ inputs.accept }}
+        AS_OF: ${{ inputs.as-of }}
+      run: |
+        args=()
+        if [ -n "$AS_OF" ]; then args+=(--as-of "$AS_OF"); fi
+        if [ -n "$ACCEPT" ]; then args+=(--accept "$ACCEPT"); fi
+        set +e
+        aos drift "$BASELINE" "$EXPORTS" "${args[@]}" >> "$GITHUB_STEP_SUMMARY"
+        code=$?
+        set -e
+        echo "code=$code" >> "$GITHUB_OUTPUT"
+    - name: Upload SARIF to code scanning
+      if: inputs.upload-sarif == 'true'
+      uses: github/codeql-action/upload-sarif@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+      with:
+        sarif_file: ${{ inputs.sarif-file }}
+        category: agent-off-switch
+    - name: Fail on findings or unreviewed drift
+      shell: bash
+      env:
+        REVIEW: ${{ steps.review.outputs.code }}
+        DRIFT: ${{ steps.drift.outputs.code }}
+      run: |
+        if [ "$REVIEW" != "0" ]; then echo "::error::aos review found findings at or above the fail-on level"; fi
+        if [ -n "$DRIFT" ] && [ "$DRIFT" != "0" ]; then echo "::error::aos drift found unreviewed agent identity changes"; fi
+        if [ "$REVIEW" != "0" ] || { [ -n "$DRIFT" ] && [ "$DRIFT" != "0" ]; }; then exit 1; fi

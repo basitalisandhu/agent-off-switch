@@ -1,0 +1,714 @@
+{
+  "tool": "agent-off-switch",
+  "version": "0.1.0",
+  "as_of": "2026-09-01",
+  "unused_days": 90,
+  "max_credential_age": 90,
+  "sources": [
+    "agents.csv",
+    "aws-access-key-last-used.json",
+    "aws-access-keys.json",
+    "aws-authorization-details.json",
+    "entra-app-role-assignments.json",
+    "entra-applications.json",
+    "entra-directory-roles.json",
+    "entra-oauth2-grants.json",
+    "entra-resource-sps.json",
+    "entra-service-principals.json",
+    "entra-sign-in-activity.json",
+    "github-deploy-keys.json",
+    "github-installations.json"
+  ],
+  "summary": {},
+  "identities": [
+    {
+      "id": "aws-role:backup-exporter",
+      "name": "backup-exporter",
+      "platform": "aws",
+      "type": "aws-iam-role",
+      "owners": [
+        "platform-team@example.com"
+      ],
+      "enabled": true,
+      "created": "2024-09-01T10:00:00Z",
+      "last_used": "2026-10-09T01:00:00Z",
+      "activity_recorded": true,
+      "credentials": [],
+      "grants": [
+        {
+          "kind": "managed-policy",
+          "name": "ReadOnlyAccess",
+          "scope": "account",
+          "ref": "arn:aws:iam::aws:policy/ReadOnlyAccess",
+          "score": 50,
+          "reason": "AWS managed ReadOnlyAccess: reads every service in the account",
+          "detail": {
+            "documents": []
+          }
+        }
+      ],
+      "trust": [
+        "Service: backup.amazonaws.com"
+      ],
+      "agent": false,
+      "agent_signals": [],
+      "used_by": [],
+      "purpose": "",
+      "refs": {
+        "role_name": "backup-exporter",
+        "arn": "arn:aws:iam::111122223333:role/backup-exporter"
+      },
+      "sources": [
+        "aws-authorization-details.json"
+      ],
+      "flags": [],
+      "blast_radius": 50,
+      "days_since_use": -38
+    },
+    {
+      "id": "aws-role:coding-agent-runner",
+      "name": "coding-agent-runner",
+      "platform": "aws",
+      "type": "aws-iam-role",
+      "owners": [],
+      "enabled": true,
+      "created": "2025-11-20T10:00:00Z",
+      "last_used": "2026-10-09T07:30:00Z",
+      "activity_recorded": true,
+      "credentials": [],
+      "grants": [],
+      "trust": [
+        "Federated: arn:aws:iam::111122223333:oidc-provider/token.actions.githubusercontent.com"
+      ],
+      "agent": true,
+      "agent_signals": [
+        "name",
+        "listed in agents.csv as ci-coding-agent"
+      ],
+      "used_by": [
+        "ci-coding-agent"
+      ],
+      "purpose": "Opens pull requests for labelled issues",
+      "refs": {
+        "role_name": "coding-agent-runner",
+        "arn": "arn:aws:iam::111122223333:role/coding-agent-runner",
+        "register_line": 2,
+        "platform": "aws"
+      },
+      "sources": [
+        "aws-authorization-details.json",
+        "agents.csv"
+      ],
+      "flags": [
+        "no-owner"
+      ],
+      "blast_radius": 0,
+      "days_since_use": -38
+    },
+    {
+      "id": "aws-role:docs-search-agent",
+      "name": "docs-search-agent",
+      "platform": "aws",
+      "type": "aws-iam-role",
+      "owners": [
+        "knowledge-team@example.com"
+      ],
+      "enabled": true,
+      "created": "2026-05-01T10:00:00Z",
+      "last_used": "2026-10-05T12:00:00Z",
+      "activity_recorded": true,
+      "credentials": [],
+      "grants": [
+        {
+          "kind": "inline-policy",
+          "name": "read-docs-bucket",
+          "scope": "account",
+          "ref": "",
+          "score": 20,
+          "reason": "named actions on named resources",
+          "detail": {
+            "document": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket"
+                  ],
+                  "Resource": [
+                    "arn:aws:s3:::example-docs-bucket",
+                    "arn:aws:s3:::example-docs-bucket/*"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "trust": [
+        "Service: lambda.amazonaws.com"
+      ],
+      "agent": true,
+      "agent_signals": [
+        "name",
+        "listed in agents.csv as docs-search"
+      ],
+      "used_by": [
+        "docs-search"
+      ],
+      "purpose": "Answers questions from the docs bucket",
+      "refs": {
+        "role_name": "docs-search-agent",
+        "arn": "arn:aws:iam::111122223333:role/docs-search-agent",
+        "register_line": 8,
+        "platform": "aws"
+      },
+      "sources": [
+        "aws-authorization-details.json",
+        "agents.csv"
+      ],
+      "flags": [],
+      "blast_radius": 20,
+      "days_since_use": -34
+    },
+    {
+      "id": "aws-user:support-bot",
+      "name": "support-bot",
+      "platform": "aws",
+      "type": "aws-iam-user",
+      "owners": [],
+      "enabled": true,
+      "created": "2025-11-30T10:00:00Z",
+      "last_used": "2026-06-01T09:00:00Z",
+      "activity_recorded": true,
+      "credentials": [
+        {
+          "kind": "access-key",
+          "key_id": "****MPLE",
+          "created": "2025-12-01T10:00:00Z",
+          "expires": null,
+          "last_used": "2026-06-01T09:00:00Z",
+          "status": "Active",
+          "age_days": 274,
+          "expired": false
+        }
+      ],
+      "grants": [
+        {
+          "kind": "managed-policy",
+          "name": "support-bot-tickets",
+          "scope": "account",
+          "ref": "arn:aws:iam::111122223333:policy/support-bot-tickets",
+          "score": 55,
+          "reason": "dynamodb:* on named resources",
+          "detail": {
+            "documents": [
+              {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": "dynamodb:*",
+                    "Resource": "arn:aws:dynamodb:ap-southeast-2:111122223333:table/support-tickets"
+                  },
+                  {
+                    "Effect": "Allow",
+                    "Action": "ses:SendEmail",
+                    "Resource": "*"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "trust": [],
+      "agent": true,
+      "agent_signals": [
+        "name"
+      ],
+      "used_by": [],
+      "purpose": "",
+      "refs": {
+        "user_name": "support-bot",
+        "arn": "arn:aws:iam::111122223333:user/support-bot"
+      },
+      "sources": [
+        "aws-access-keys.json",
+        "aws-authorization-details.json",
+        "aws-access-key-last-used.json"
+      ],
+      "flags": [
+        "no-owner",
+        "unused",
+        "stale-credential"
+      ],
+      "blast_radius": 55,
+      "days_since_use": 92
+    },
+    {
+      "id": "entra:aaaaaaaa-0000-4000-8000-000000000001",
+      "name": "mail-triage-agent",
+      "platform": "entra",
+      "type": "entra-app",
+      "owners": [
+        "messaging-team@example.com"
+      ],
+      "enabled": true,
+      "created": "2025-07-28T09:00:00Z",
+      "last_used": "2026-10-08T23:41:12Z",
+      "activity_recorded": true,
+      "credentials": [
+        {
+          "kind": "client-secret",
+          "key_id": "****0001",
+          "created": "2025-08-01T00:00:00Z",
+          "expires": "2027-08-01T00:00:00Z",
+          "last_used": null,
+          "status": "Active",
+          "age_days": 396,
+          "expired": false
+        }
+      ],
+      "grants": [
+        {
+          "kind": "application-permission",
+          "name": "Microsoft Graph: Mail.ReadWrite",
+          "scope": "tenant",
+          "ref": "asg-demo-0001",
+          "score": 90,
+          "reason": "Mail.ReadWrite as an application permission changes data for every user in the tenant",
+          "detail": {
+            "permission": "Mail.ReadWrite",
+            "resource": "Microsoft Graph",
+            "resource_id": "dddddddd-0000-4000-8000-000000000001"
+          }
+        }
+      ],
+      "trust": [],
+      "agent": true,
+      "agent_signals": [
+        "name",
+        "listed in agents.csv as mail-triage"
+      ],
+      "used_by": [
+        "mail-triage"
+      ],
+      "purpose": "Sorts the shared support mailbox",
+      "refs": {
+        "app_id": "aaaaaaaa-0000-4000-8000-000000000001",
+        "application_object_id": "bbbbbbbb-0000-4000-8000-000000000001",
+        "service_principal_id": "cccccccc-0000-4000-8000-000000000001",
+        "sp_type": "Application",
+        "register_line": 4,
+        "platform": "microsoft-365"
+      },
+      "sources": [
+        "entra-applications.json",
+        "entra-service-principals.json",
+        "entra-sign-in-activity.json",
+        "entra-app-role-assignments.json",
+        "agents.csv"
+      ],
+      "flags": [
+        "stale-credential"
+      ],
+      "blast_radius": 90,
+      "days_since_use": -37
+    },
+    {
+      "id": "entra:aaaaaaaa-0000-4000-8000-000000000002",
+      "name": "calendar-assistant",
+      "platform": "entra",
+      "type": "entra-app",
+      "owners": [
+        "it-workplace@example.com"
+      ],
+      "enabled": true,
+      "created": "2026-05-20T09:00:00Z",
+      "last_used": "2026-10-07T08:02:00Z",
+      "activity_recorded": true,
+      "credentials": [
+        {
+          "kind": "certificate",
+          "key_id": "****0002",
+          "created": "2026-08-01T00:00:00Z",
+          "expires": "2027-08-01T00:00:00Z",
+          "last_used": null,
+          "status": "Active",
+          "age_days": 31,
+          "expired": false
+        }
+      ],
+      "grants": [
+        {
+          "kind": "delegated-permission",
+          "name": "Microsoft Graph: User.Read (all users)",
+          "scope": "all users",
+          "ref": "grant-demo-0001",
+          "score": 20,
+          "reason": "User.Read delegated for all users",
+          "detail": {
+            "permission": "User.Read",
+            "all_users": true,
+            "resource": "Microsoft Graph"
+          }
+        },
+        {
+          "kind": "delegated-permission",
+          "name": "Microsoft Graph: Calendars.Read (all users)",
+          "scope": "all users",
+          "ref": "grant-demo-0001",
+          "score": 50,
+          "reason": "Calendars.Read delegated for all users: it acts for every user who signs in to it",
+          "detail": {
+            "permission": "Calendars.Read",
+            "all_users": true,
+            "resource": "Microsoft Graph"
+          }
+        }
+      ],
+      "trust": [],
+      "agent": true,
+      "agent_signals": [
+        "name"
+      ],
+      "used_by": [],
+      "purpose": "",
+      "refs": {
+        "app_id": "aaaaaaaa-0000-4000-8000-000000000002",
+        "application_object_id": "bbbbbbbb-0000-4000-8000-000000000002",
+        "service_principal_id": "cccccccc-0000-4000-8000-000000000002",
+        "sp_type": "Application"
+      },
+      "sources": [
+        "entra-applications.json",
+        "entra-service-principals.json",
+        "entra-sign-in-activity.json",
+        "entra-oauth2-grants.json"
+      ],
+      "flags": [],
+      "blast_radius": 50,
+      "days_since_use": -36
+    },
+    {
+      "id": "entra:aaaaaaaa-0000-4000-8000-000000000003",
+      "name": "func-summariser",
+      "platform": "entra",
+      "type": "entra-managed-identity",
+      "owners": [
+        "data-platform@example.com"
+      ],
+      "enabled": true,
+      "created": "2026-03-01T09:00:00Z",
+      "last_used": "2026-10-09T06:15:00Z",
+      "activity_recorded": true,
+      "credentials": [],
+      "grants": [
+        {
+          "kind": "application-permission",
+          "name": "Microsoft Graph: Sites.Selected",
+          "scope": "tenant",
+          "ref": "asg-demo-0002",
+          "score": 40,
+          "reason": "Sites.Selected is a tenant-wide application permission",
+          "detail": {
+            "permission": "Sites.Selected",
+            "resource": "Microsoft Graph",
+            "resource_id": "dddddddd-0000-4000-8000-000000000001"
+          }
+        }
+      ],
+      "trust": [],
+      "agent": true,
+      "agent_signals": [
+        "listed in agents.csv as summariser"
+      ],
+      "used_by": [
+        "summariser"
+      ],
+      "purpose": "Summarises SharePoint project sites",
+      "refs": {
+        "app_id": "aaaaaaaa-0000-4000-8000-000000000003",
+        "service_principal_id": "cccccccc-0000-4000-8000-000000000003",
+        "sp_type": "ManagedIdentity",
+        "managed_identity_resource": "/subscriptions/00000000-0000-4000-8000-0000000000aa/resourceGroups/rg-demo/providers/Microsoft.Web/sites/func-summariser",
+        "register_line": 5,
+        "platform": "azure"
+      },
+      "sources": [
+        "entra-service-principals.json",
+        "entra-sign-in-activity.json",
+        "entra-app-role-assignments.json",
+        "agents.csv"
+      ],
+      "flags": [],
+      "blast_radius": 40,
+      "days_since_use": -38
+    },
+    {
+      "id": "entra:aaaaaaaa-0000-4000-8000-000000000004",
+      "name": "legacy-reporting-app",
+      "platform": "entra",
+      "type": "entra-app",
+      "owners": [
+        "finance-it@example.com"
+      ],
+      "enabled": true,
+      "created": "2024-02-10T09:00:00Z",
+      "last_used": "2026-09-30T02:00:00Z",
+      "activity_recorded": true,
+      "credentials": [
+        {
+          "kind": "client-secret",
+          "key_id": "****0004",
+          "created": "2025-03-01T00:00:00Z",
+          "expires": "2026-03-01T00:00:00Z",
+          "last_used": null,
+          "status": "Active",
+          "age_days": 549,
+          "expired": true
+        },
+        {
+          "kind": "client-secret",
+          "key_id": "****0005",
+          "created": "2026-08-15T00:00:00Z",
+          "expires": "2027-02-15T00:00:00Z",
+          "last_used": null,
+          "status": "Active",
+          "age_days": 17,
+          "expired": false
+        }
+      ],
+      "grants": [
+        {
+          "kind": "application-permission",
+          "name": "Microsoft Graph: Reports.Read.All",
+          "scope": "tenant",
+          "ref": "asg-demo-0003",
+          "score": 40,
+          "reason": "Reports.Read.All is a tenant-wide application permission",
+          "detail": {
+            "permission": "Reports.Read.All",
+            "resource": "Microsoft Graph",
+            "resource_id": "dddddddd-0000-4000-8000-000000000001"
+          }
+        }
+      ],
+      "trust": [],
+      "agent": false,
+      "agent_signals": [],
+      "used_by": [],
+      "purpose": "",
+      "refs": {
+        "app_id": "aaaaaaaa-0000-4000-8000-000000000004",
+        "application_object_id": "bbbbbbbb-0000-4000-8000-000000000004",
+        "service_principal_id": "cccccccc-0000-4000-8000-000000000004",
+        "sp_type": "Application"
+      },
+      "sources": [
+        "entra-applications.json",
+        "entra-service-principals.json",
+        "entra-sign-in-activity.json",
+        "entra-app-role-assignments.json"
+      ],
+      "flags": [
+        "expired-credential"
+      ],
+      "blast_radius": 40,
+      "days_since_use": -29
+    },
+    {
+      "id": "entra:aaaaaaaa-0000-4000-8000-000000000005",
+      "name": "helpdesk-copilot",
+      "platform": "entra",
+      "type": "entra-app",
+      "owners": [
+        "it-servicedesk@example.com"
+      ],
+      "enabled": true,
+      "created": "2026-04-02T09:00:00Z",
+      "last_used": "2026-10-01T10:20:00Z",
+      "activity_recorded": true,
+      "credentials": [
+        {
+          "kind": "federated",
+          "key_id": "****0006",
+          "created": null,
+          "expires": null,
+          "last_used": null,
+          "status": "subject helpdesk-runtime",
+          "age_days": null,
+          "expired": false
+        }
+      ],
+      "grants": [
+        {
+          "kind": "directory-role",
+          "name": "Helpdesk Administrator",
+          "scope": "tenant",
+          "ref": "roleasg-demo-0001",
+          "score": 85,
+          "reason": "Helpdesk Administrator is an admin role",
+          "detail": {
+            "role_definition_id": "12121212-0000-4000-8000-000000000001",
+            "directory_scope": "/"
+          }
+        }
+      ],
+      "trust": [],
+      "agent": true,
+      "agent_signals": [
+        "name"
+      ],
+      "used_by": [],
+      "purpose": "",
+      "refs": {
+        "app_id": "aaaaaaaa-0000-4000-8000-000000000005",
+        "application_object_id": "bbbbbbbb-0000-4000-8000-000000000005",
+        "service_principal_id": "cccccccc-0000-4000-8000-000000000005",
+        "sp_type": "Application"
+      },
+      "sources": [
+        "entra-applications.json",
+        "entra-service-principals.json",
+        "entra-sign-in-activity.json",
+        "entra-directory-roles.json"
+      ],
+      "flags": [],
+      "blast_radius": 85,
+      "days_since_use": -30
+    },
+    {
+      "id": "github-deploy-key:example-org/website#1001",
+      "name": "release-notes-push",
+      "platform": "github",
+      "type": "github-deploy-key",
+      "owners": [
+        "release-team@example.com"
+      ],
+      "enabled": true,
+      "created": "2026-04-01T10:00:00Z",
+      "last_used": "2026-10-06T10:00:00Z",
+      "activity_recorded": true,
+      "credentials": [
+        {
+          "kind": "deploy-key",
+          "key_id": "****1001",
+          "created": "2026-04-01T10:00:00Z",
+          "expires": null,
+          "last_used": null,
+          "status": "Active",
+          "age_days": 153,
+          "expired": false
+        }
+      ],
+      "grants": [
+        {
+          "kind": "repository-access",
+          "name": "example-org/website (read-write)",
+          "scope": "example-org/website",
+          "ref": "",
+          "score": 50,
+          "reason": "read-write deploy key: can push to example-org/website",
+          "detail": {
+            "repository": "example-org/website",
+            "read_only": false
+          }
+        }
+      ],
+      "trust": [],
+      "agent": true,
+      "agent_signals": [
+        "listed in agents.csv as release-notes-agent"
+      ],
+      "used_by": [
+        "release-notes-agent"
+      ],
+      "purpose": "Pushes the release notes page",
+      "refs": {
+        "repository": "example-org/website",
+        "deploy_key_id": 1001,
+        "register_line": 7,
+        "platform": "github"
+      },
+      "sources": [
+        "github-deploy-keys.json",
+        "agents.csv"
+      ],
+      "flags": [
+        "stale-credential"
+      ],
+      "blast_radius": 50,
+      "days_since_use": -35
+    },
+    {
+      "id": "register:crm-mcp-connector",
+      "name": "crm-mcp-connector",
+      "platform": "register",
+      "type": "mcp-connector",
+      "owners": [
+        "sales-ops@example.com"
+      ],
+      "enabled": true,
+      "created": null,
+      "last_used": "2026-10-08T00:00:00Z",
+      "activity_recorded": true,
+      "credentials": [
+        {
+          "kind": "api-key",
+          "key_id": "****0001",
+          "created": "2026-08-20T00:00:00Z",
+          "expires": "2027-08-20T00:00:00Z",
+          "last_used": null,
+          "status": "Active",
+          "age_days": 12,
+          "expired": false
+        }
+      ],
+      "grants": [
+        {
+          "kind": "declared-permission",
+          "name": "contacts:read",
+          "scope": "",
+          "ref": "",
+          "score": 20,
+          "reason": "declared permission 'contacts:read'",
+          "detail": {}
+        },
+        {
+          "kind": "declared-permission",
+          "name": "deals:write",
+          "scope": "",
+          "ref": "",
+          "score": 50,
+          "reason": "declared permission 'deals:write' changes data",
+          "detail": {}
+        }
+      ],
+      "trust": [],
+      "agent": true,
+      "agent_signals": [
+        "name",
+        "listed in agents.csv"
+      ],
+      "used_by": [],
+      "purpose": "CRM tools for the sales assistant",
+      "refs": {
+        "register_line": 9,
+        "platform": "CRM vendor",
+        "gateway": "mcp-gateway.example.com"
+      },
+      "sources": [
+        "agents.csv"
+      ],
+      "flags": [],
+      "blast_radius": 50,
+      "days_since_use": -37
+    }
+  ],
+  "notes": [
+    "GitHub installation exports carry no last-use date: GitHub App activity is not judged"
+  ]
+}

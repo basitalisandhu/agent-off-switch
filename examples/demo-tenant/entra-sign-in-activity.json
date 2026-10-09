@@ -1,0 +1,49 @@
+{
+  "value": [
+    {
+      "appId": "aaaaaaaa-0000-4000-8000-000000000001",
+      "lastSignInActivity": {
+        "lastSignInDateTime": "2026-10-08T23:41:12Z"
+      },
+      "applicationAuthenticationClientSignInActivity": {
+        "lastSignInDateTime": "2026-10-08T23:41:12Z"
+      }
+    },
+    {
+      "appId": "aaaaaaaa-0000-4000-8000-000000000002",
+      "lastSignInActivity": {
+        "lastSignInDateTime": "2026-10-07T08:02:00Z"
+      },
+      "applicationAuthenticationClientSignInActivity": {
+        "lastSignInDateTime": "2026-10-07T08:02:00Z"
+      }
+    },
+    {
+      "appId": "aaaaaaaa-0000-4000-8000-000000000003",
+      "lastSignInActivity": {
+        "lastSignInDateTime": "2026-10-09T06:15:00Z"
+      },
+      "applicationAuthenticationClientSignInActivity": {
+        "lastSignInDateTime": "2026-10-09T06:15:00Z"
+      }
+    },
+    {
+      "appId": "aaaaaaaa-0000-4000-8000-000000000004",
+      "lastSignInActivity": {
+        "lastSignInDateTime": "2026-09-30T02:00:00Z"
+      },
+      "applicationAuthenticationClientSignInActivity": {
+        "lastSignInDateTime": "2026-09-30T02:00:00Z"
+      }
+    },
+    {
+      "appId": "aaaaaaaa-0000-4000-8000-000000000005",
+      "lastSignInActivity": {
+        "lastSignInDateTime": "2026-10-01T10:20:00Z"
+      },
+      "applicationAuthenticationClientSignInActivity": {
+        "lastSignInDateTime": "2026-10-01T10:20:00Z"
+      }
+    }
+  ]
+}

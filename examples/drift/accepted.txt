@@ -1,0 +1,3 @@
+# Changes a person has reviewed. One key per line: an identity id accepts every change to that identity,
+# "identity id|change" accepts one change. aos drift prints the keys of changes not yet reviewed.
+github-app:docs-preview-bot

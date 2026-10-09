@@ -1,0 +1,12 @@
+{
+  "value": [
+    {
+      "id": "grant-demo-0001",
+      "clientId": "cccccccc-0000-4000-8000-000000000002",
+      "consentType": "AllPrincipals",
+      "principalId": null,
+      "resourceId": "dddddddd-0000-4000-8000-000000000001",
+      "scope": "User.Read Calendars.Read"
+    }
+  ]
+}

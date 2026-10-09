@@ -1,0 +1,23 @@
+{
+  "value": [
+    {
+      "id": "dddddddd-0000-4000-8000-000000000001",
+      "appId": "00000003-0000-0000-c000-000000000000",
+      "displayName": "Microsoft Graph",
+      "appRoles": [
+        {
+          "id": "eeeeeeee-0000-4000-8000-000000000001",
+          "value": "Mail.ReadWrite"
+        },
+        {
+          "id": "eeeeeeee-0000-4000-8000-000000000002",
+          "value": "Sites.Selected"
+        },
+        {
+          "id": "eeeeeeee-0000-4000-8000-000000000003",
+          "value": "Reports.Read.All"
+        }
+      ]
+    }
+  ]
+}

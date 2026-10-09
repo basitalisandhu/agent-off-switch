@@ -1,0 +1,9 @@
+id,name,type,owner,purpose,platform,identity,permissions,last_used,credential_kind,credential_id,credential_created,credential_expires,gateway
+ci-coding-agent,ci-coding-agent,coding-agent,,Opens pull requests for labelled issues,aws,aws-role:coding-agent-runner,,,,,,,
+repo-autopilot,repo-autopilot,coding-agent,,Dependency and refactor pull requests,github,github-app:repo-autopilot,,,,,,,
+mail-triage,mail-triage,mail-agent,,Sorts the shared support mailbox,microsoft-365,aaaaaaaa-0000-4000-8000-000000000001,,,,,,,
+summariser,summariser,agent,data-platform@example.com,Summarises SharePoint project sites,azure,entra:aaaaaaaa-0000-4000-8000-000000000003,,,,,,,
+docs-preview,docs-preview,agent,web-team@example.com,Comments preview links on documentation pull requests,github,github-app:docs-preview-bot,,,,,,,
+release-notes-agent,release-notes-agent,agent,release-team@example.com,Pushes the release notes page,github,github-deploy-key:example-org/website#1001,,,,,,,
+docs-search,docs-search,agent,knowledge-team@example.com,Answers questions from the docs bucket,aws,aws-role:docs-search-agent,,,,,,,
+crm-mcp-connector,crm-mcp-connector,mcp-connector,sales-ops@example.com,CRM tools for the sales assistant,CRM vendor,,contacts:read;deals:write,2026-10-08,api-key,demo-key-0001,2026-08-20,2027-08-20,mcp-gateway.example.com

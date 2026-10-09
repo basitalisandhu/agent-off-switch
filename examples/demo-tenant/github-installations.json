@@ -1,0 +1,41 @@
+{
+  "total_count": 2,
+  "installations": [
+    {
+      "id": 50000001,
+      "app_id": 900001,
+      "app_slug": "repo-autopilot",
+      "account": {
+        "login": "example-org",
+        "type": "Organization"
+      },
+      "repository_selection": "all",
+      "created_at": "2026-02-14T10:00:00Z",
+      "suspended_at": null,
+      "permissions": {
+        "administration": "write",
+        "contents": "write",
+        "metadata": "read",
+        "pull_requests": "write",
+        "workflows": "write"
+      }
+    },
+    {
+      "id": 50000002,
+      "app_id": 900002,
+      "app_slug": "docs-preview-bot",
+      "account": {
+        "login": "example-org",
+        "type": "Organization"
+      },
+      "repository_selection": "selected",
+      "created_at": "2026-06-01T10:00:00Z",
+      "suspended_at": null,
+      "permissions": {
+        "contents": "read",
+        "metadata": "read",
+        "pull_requests": "write"
+      }
+    }
+  ]
+}

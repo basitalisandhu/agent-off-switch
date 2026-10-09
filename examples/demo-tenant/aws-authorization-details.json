@@ -1,0 +1,221 @@
+{
+  "UserDetailList": [
+    {
+      "Path": "/",
+      "UserName": "support-bot",
+      "UserId": "AIDAEXAMPLEDEMO00001",
+      "Arn": "arn:aws:iam::111122223333:user/support-bot",
+      "CreateDate": "2025-11-30T10:00:00Z",
+      "GroupList": [],
+      "Tags": [
+        {
+          "Key": "purpose",
+          "Value": "ticket replies"
+        }
+      ],
+      "AttachedManagedPolicies": [
+        {
+          "PolicyName": "support-bot-tickets",
+          "PolicyArn": "arn:aws:iam::111122223333:policy/support-bot-tickets"
+        }
+      ],
+      "UserPolicyList": []
+    }
+  ],
+  "GroupDetailList": [],
+  "RoleDetailList": [
+    {
+      "Path": "/",
+      "RoleName": "coding-agent-runner",
+      "RoleId": "AROAEXAMPLEDEMO00001",
+      "Arn": "arn:aws:iam::111122223333:role/coding-agent-runner",
+      "CreateDate": "2025-11-20T10:00:00Z",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Federated": "arn:aws:iam::111122223333:oidc-provider/token.actions.githubusercontent.com"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+              "StringLike": {
+                "token.actions.githubusercontent.com:sub": "repo:example-org/*"
+              }
+            }
+          }
+        ]
+      },
+      "Tags": [
+        {
+          "Key": "purpose",
+          "Value": "coding agent in CI"
+        }
+      ],
+      "RoleLastUsed": {
+        "LastUsedDate": "2026-10-09T07:30:00Z",
+        "Region": "ap-southeast-2"
+      },
+      "AttachedManagedPolicies": [],
+      "RolePolicyList": [
+        {
+          "PolicyName": "agent-all",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": "*",
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Path": "/",
+      "RoleName": "docs-search-agent",
+      "RoleId": "AROAEXAMPLEDEMO00002",
+      "Arn": "arn:aws:iam::111122223333:role/docs-search-agent",
+      "CreateDate": "2026-05-01T10:00:00Z",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "lambda.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "Tags": [
+        {
+          "Key": "owner",
+          "Value": "knowledge-team@example.com"
+        }
+      ],
+      "RoleLastUsed": {
+        "LastUsedDate": "2026-10-05T12:00:00Z",
+        "Region": "ap-southeast-2"
+      },
+      "AttachedManagedPolicies": [],
+      "RolePolicyList": [
+        {
+          "PolicyName": "read-docs-bucket",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "s3:GetObject",
+                  "s3:ListBucket"
+                ],
+                "Resource": [
+                  "arn:aws:s3:::example-docs-bucket",
+                  "arn:aws:s3:::example-docs-bucket/*"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Path": "/",
+      "RoleName": "backup-exporter",
+      "RoleId": "AROAEXAMPLEDEMO00003",
+      "Arn": "arn:aws:iam::111122223333:role/backup-exporter",
+      "CreateDate": "2024-09-01T10:00:00Z",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "backup.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "Tags": [
+        {
+          "Key": "owner",
+          "Value": "platform-team@example.com"
+        }
+      ],
+      "RoleLastUsed": {
+        "LastUsedDate": "2026-10-09T01:00:00Z",
+        "Region": "ap-southeast-2"
+      },
+      "AttachedManagedPolicies": [
+        {
+          "PolicyName": "ReadOnlyAccess",
+          "PolicyArn": "arn:aws:iam::aws:policy/ReadOnlyAccess"
+        }
+      ],
+      "RolePolicyList": []
+    },
+    {
+      "Path": "/aws-service-role/support.amazonaws.com/",
+      "RoleName": "AWSServiceRoleForSupport",
+      "RoleId": "AROAEXAMPLEDEMO00004",
+      "Arn": "arn:aws:iam::111122223333:role/aws-service-role/support.amazonaws.com/AWSServiceRoleForSupport",
+      "CreateDate": "2023-01-01T00:00:00Z",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "support.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "Tags": [],
+      "RoleLastUsed": {},
+      "AttachedManagedPolicies": [
+        {
+          "PolicyName": "AWSSupportServiceRolePolicy",
+          "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AWSSupportServiceRolePolicy"
+        }
+      ],
+      "RolePolicyList": []
+    }
+  ],
+  "Policies": [
+    {
+      "PolicyName": "support-bot-tickets",
+      "Arn": "arn:aws:iam::111122223333:policy/support-bot-tickets",
+      "DefaultVersionId": "v1",
+      "PolicyVersionList": [
+        {
+          "VersionId": "v1",
+          "IsDefaultVersion": true,
+          "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": "dynamodb:*",
+                "Resource": "arn:aws:dynamodb:ap-southeast-2:111122223333:table/support-tickets"
+              },
+              {
+                "Effect": "Allow",
+                "Action": "ses:SendEmail",
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "value": [
+    {
+      "id": "bbbbbbbb-0000-4000-8000-000000000001",
+      "appId": "aaaaaaaa-0000-4000-8000-000000000001",
+      "displayName": "mail-triage-agent",
+      "createdDateTime": "2025-07-28T09:00:00Z",
+      "signInAudience": "AzureADMyOrg",
+      "tags": [],
+      "owners": [],
+      "passwordCredentials": [
+        {
+          "keyId": "ffffffff-0000-4000-8000-000000000001",
+          "displayName": "prod",
+          "startDateTime": "2025-08-01T00:00:00Z",
+          "endDateTime": "2027-08-01T00:00:00Z"
+        }
+      ],
+      "keyCredentials": []
+    },
+    {
+      "id": "bbbbbbbb-0000-4000-8000-000000000002",
+      "appId": "aaaaaaaa-0000-4000-8000-000000000002",
+      "displayName": "calendar-assistant",
+      "createdDateTime": "2026-05-20T09:00:00Z",
+      "signInAudience": "AzureADMyOrg",
+      "tags": [],
+      "owners": [
+        {
+          "@odata.type": "#microsoft.graph.user",
+          "id": "99999999-0000-4000-8000-000000000001",
+          "userPrincipalName": "it-workplace@example.com"
+        }
+      ],
+      "passwordCredentials": [],
+      "keyCredentials": [
+        {
+          "keyId": "ffffffff-0000-4000-8000-000000000002",
+          "type": "AsymmetricX509Cert",
+          "usage": "Verify",
+          "startDateTime": "2026-08-01T00:00:00Z",
+          "endDateTime": "2027-08-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "bbbbbbbb-0000-4000-8000-000000000004",
+      "appId": "aaaaaaaa-0000-4000-8000-000000000004",
+      "displayName": "legacy-reporting-app",
+      "createdDateTime": "2024-02-10T09:00:00Z",
+      "signInAudience": "AzureADMyOrg",
+      "tags": [],
+      "owners": [
+        {
+          "@odata.type": "#microsoft.graph.user",
+          "id": "99999999-0000-4000-8000-000000000002",
+          "userPrincipalName": "finance-it@example.com"
+        }
+      ],
+      "passwordCredentials": [
+        {
+          "keyId": "ffffffff-0000-4000-8000-000000000004",
+          "displayName": "2025",
+          "startDateTime": "2025-03-01T00:00:00Z",
+          "endDateTime": "2026-03-01T00:00:00Z"
+        },
+        {
+          "keyId": "ffffffff-0000-4000-8000-000000000005",
+          "displayName": "2026",
+          "startDateTime": "2026-08-15T00:00:00Z",
+          "endDateTime": "2027-02-15T00:00:00Z"
+        }
+      ],
+      "keyCredentials": []
+    },
+    {
+      "id": "bbbbbbbb-0000-4000-8000-000000000005",
+      "appId": "aaaaaaaa-0000-4000-8000-000000000005",
+      "displayName": "helpdesk-copilot",
+      "createdDateTime": "2026-04-02T09:00:00Z",
+      "signInAudience": "AzureADMyOrg",
+      "tags": [],
+      "owners": [
+        {
+          "@odata.type": "#microsoft.graph.user",
+          "id": "99999999-0000-4000-8000-000000000003",
+          "userPrincipalName": "it-servicedesk@example.com"
+        }
+      ],
+      "passwordCredentials": [],
+      "keyCredentials": [],
+      "federatedIdentityCredentials": [
+        {
+          "id": "ffffffff-0000-4000-8000-000000000006",
+          "name": "helpdesk-runtime",
+          "issuer": "https://login.microsoftonline.com/00000000-0000-4000-8000-000000000000/v2.0",
+          "subject": "helpdesk-runtime"
+        }
+      ]
+    }
+  ]
+}

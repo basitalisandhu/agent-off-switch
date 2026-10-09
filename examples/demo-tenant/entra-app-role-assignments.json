@@ -1,0 +1,31 @@
+{
+  "value": [
+    {
+      "id": "asg-demo-0001",
+      "principalId": "cccccccc-0000-4000-8000-000000000001",
+      "principalDisplayName": "mail-triage-agent",
+      "resourceId": "dddddddd-0000-4000-8000-000000000001",
+      "resourceDisplayName": "Microsoft Graph",
+      "appRoleId": "eeeeeeee-0000-4000-8000-000000000001",
+      "createdDateTime": "2025-08-01T00:00:00Z"
+    },
+    {
+      "id": "asg-demo-0002",
+      "principalId": "cccccccc-0000-4000-8000-000000000003",
+      "principalDisplayName": "func-summariser",
+      "resourceId": "dddddddd-0000-4000-8000-000000000001",
+      "resourceDisplayName": "Microsoft Graph",
+      "appRoleId": "eeeeeeee-0000-4000-8000-000000000002",
+      "createdDateTime": "2026-03-01T00:00:00Z"
+    },
+    {
+      "id": "asg-demo-0003",
+      "principalId": "cccccccc-0000-4000-8000-000000000004",
+      "principalDisplayName": "legacy-reporting-app",
+      "resourceId": "dddddddd-0000-4000-8000-000000000001",
+      "resourceDisplayName": "Microsoft Graph",
+      "appRoleId": "eeeeeeee-0000-4000-8000-000000000003",
+      "createdDateTime": "2024-02-10T00:00:00Z"
+    }
+  ]
+}

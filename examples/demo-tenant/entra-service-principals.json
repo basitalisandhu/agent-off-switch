@@ -1,0 +1,70 @@
+{
+  "value": [
+    {
+      "id": "cccccccc-0000-4000-8000-000000000001",
+      "appId": "aaaaaaaa-0000-4000-8000-000000000001",
+      "displayName": "mail-triage-agent",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appOwnerOrganizationId": "00000000-0000-4000-8000-000000000000",
+      "tags": [
+        "WindowsAzureActiveDirectoryIntegratedApp"
+      ],
+      "owners": [],
+      "passwordCredentials": [],
+      "keyCredentials": []
+    },
+    {
+      "id": "cccccccc-0000-4000-8000-000000000002",
+      "appId": "aaaaaaaa-0000-4000-8000-000000000002",
+      "displayName": "calendar-assistant",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appOwnerOrganizationId": "00000000-0000-4000-8000-000000000000",
+      "tags": [],
+      "owners": [],
+      "passwordCredentials": [],
+      "keyCredentials": []
+    },
+    {
+      "id": "cccccccc-0000-4000-8000-000000000003",
+      "appId": "aaaaaaaa-0000-4000-8000-000000000003",
+      "displayName": "func-summariser",
+      "servicePrincipalType": "ManagedIdentity",
+      "accountEnabled": true,
+      "alternativeNames": [
+        "isExplicit=False",
+        "/subscriptions/00000000-0000-4000-8000-0000000000aa/resourceGroups/rg-demo/providers/Microsoft.Web/sites/func-summariser"
+      ],
+      "createdDateTime": "2026-03-01T09:00:00Z",
+      "tags": [],
+      "owners": [],
+      "passwordCredentials": [],
+      "keyCredentials": []
+    },
+    {
+      "id": "cccccccc-0000-4000-8000-000000000004",
+      "appId": "aaaaaaaa-0000-4000-8000-000000000004",
+      "displayName": "legacy-reporting-app",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appOwnerOrganizationId": "00000000-0000-4000-8000-000000000000",
+      "tags": [],
+      "owners": [],
+      "passwordCredentials": [],
+      "keyCredentials": []
+    },
+    {
+      "id": "cccccccc-0000-4000-8000-000000000005",
+      "appId": "aaaaaaaa-0000-4000-8000-000000000005",
+      "displayName": "helpdesk-copilot",
+      "servicePrincipalType": "Application",
+      "accountEnabled": true,
+      "appOwnerOrganizationId": "00000000-0000-4000-8000-000000000000",
+      "tags": [],
+      "owners": [],
+      "passwordCredentials": [],
+      "keyCredentials": []
+    }
+  ]
+}
