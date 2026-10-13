@@ -14,6 +14,8 @@ Copilot agents, MCP connectors and coding agents run as Entra app registrations,
 - **`aos off <identity>`**: an ordered runbook (disable, revoke sessions and grants, delete credentials, remove role assignments, verify in the audit log) with the command and the verification command for each step. It prints; it never runs anything.
 - **`aos drift old.json new.json`**: new identities, new grants and lost owners since the last inventory; exits 1 while anything new is unreviewed, for CI.
 
+**Why this exists:** agents run as service accounts that nobody owns, recertifies or can stop fast. The argument, the failure modes and the controls are in [Agent identities are the new service accounts](https://basitalisandhu.github.io/posts/agent-identities-are-the-new-service-accounts/).
+
 Standard-library Python 3.10+, offline, read-only. It needs no credentials of its own: you take the exports with read-only commands listed in [docs/exports.md](docs/exports.md).
 
 ## The 60-second demo
