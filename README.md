@@ -20,10 +20,11 @@ Standard-library Python 3.10+, offline, read-only. It needs no credentials of it
 
 ## The 60-second demo
 
-The repository ships a synthetic tenant in [examples/demo-tenant](examples/demo-tenant): Entra, AWS and GitHub exports plus an `agents.csv` register, with fake ids and the documentation AWS account `111122223333`. The output below is real output from that folder.
+The repository ships a synthetic tenant in [examples/demo-tenant](examples/demo-tenant): Entra, AWS and GitHub exports plus an `agents.csv` register, with fake ids and the documentation AWS account `111122223333`. The demo reads that folder, so clone the repository first (a plain `pip install` does not include the examples). The output below is real output from that folder.
 
 ```console
-$ pip install "git+https://github.com/basitalisandhu/agent-off-switch"
+$ git clone https://github.com/basitalisandhu/agent-off-switch && cd agent-off-switch
+$ python3 -m venv .venv && . .venv/bin/activate && pip install .
 $ aos review examples/demo-tenant --as-of 2026-10-09
 # Agent access review
 
@@ -99,6 +100,8 @@ From git (no dependencies at run time):
 pip install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.0"
 aos --help
 ```
+
+If your system Python refuses `pip install` outside a virtual environment, use `pipx install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.0"` instead. `--as-of` defaults to today, so without it the demo's ages and "unused for N days" flags move with the calendar; that is why the examples pin it.
 
 Container image, built by [the release workflow](.github/workflows/publish-github-packages.yml) for each version tag, with an SPDX SBOM, build provenance and a keyless signature:
 
