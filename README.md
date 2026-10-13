@@ -1,5 +1,9 @@
 # agent-off-switch: find every AI agent identity in Microsoft 365, AWS and GitHub, see what it can reach, and switch it off
 
+![aos review on the demo tenant, then aos off for the riskiest agent identity](docs/demo.gif)
+
+<sub>Recorded from [docs/demo.tape](docs/demo.tape) with [vhs](https://github.com/charmbracelet/vhs) on the synthetic tenant in `examples/demo-tenant`; the text transcript is in [the demo section](#the-60-second-demo).</sub>
+
 [![CI](https://github.com/basitalisandhu/agent-off-switch/actions/workflows/ci.yml/badge.svg)](https://github.com/basitalisandhu/agent-off-switch/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
