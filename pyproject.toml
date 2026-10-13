@@ -72,6 +72,7 @@ include = [
   "CHANGELOG.md",
   "pyproject.toml",
 ]
+exclude = ["docs/demo.gif"]
 
 [tool.ruff]
 line-length = 120
