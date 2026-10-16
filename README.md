@@ -196,3 +196,9 @@ Exit codes: 0 nothing to act on, 1 something needs a person (findings at or abov
 ## Contributing and security
 
 See [CONTRIBUTING.md](CONTRIBUTING.md), [docs/good-first-issues.md](docs/good-first-issues.md), [SECURITY.md](SECURITY.md) and the [Code of Conduct](CODE_OF_CONDUCT.md). Licensed under [MIT](LICENSE). Changes are listed in [CHANGELOG.md](CHANGELOG.md).
+
+The plan is in [ROADMAP.md](ROADMAP.md); questions and ideas go in [Discussions](https://github.com/basitalisandhu/agent-off-switch/discussions).
+
+## Contributors
+
+Be the first; start with a [good first issue](https://github.com/basitalisandhu/agent-off-switch/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
