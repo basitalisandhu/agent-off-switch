@@ -8,6 +8,8 @@ Only the latest release is supported. Pin a tag (or the image digest) if you nee
 
 ## Reporting a vulnerability
 
+Report a vulnerability privately: <https://github.com/basitalisandhu/agent-off-switch/security/advisories/new>
+
 Please do not open a public issue for a security problem.
 
 1. Use GitHub's private vulnerability reporting on this repository ("Security" tab, "Report a vulnerability").
