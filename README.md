@@ -97,16 +97,16 @@ $ echo $?
 From git (no dependencies at run time):
 
 ```bash
-pip install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.0"
+pip install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.1"
 aos --help
 ```
 
-If your system Python refuses `pip install` outside a virtual environment, use `pipx install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.0"` instead. `--as-of` defaults to today, so without it the demo's ages and "unused for N days" flags move with the calendar; that is why the examples pin it.
+If your system Python refuses `pip install` outside a virtual environment, use `pipx install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.1"` instead. `--as-of` defaults to today, so without it the demo's ages and "unused for N days" flags move with the calendar; that is why the examples pin it.
 
 Container image, built by [the release workflow](.github/workflows/publish-github-packages.yml) for each version tag, with an SPDX SBOM, build provenance and a keyless signature:
 
 ```bash
-docker run --rm -v "$PWD/exports:/work/exports:ro" ghcr.io/basitalisandhu/agent-off-switch:0.1.0 review exports
+docker run --rm -v "$PWD/exports:/work/exports:ro" ghcr.io/basitalisandhu/agent-off-switch:0.1.1 review exports
 ```
 
 GitHub Action ([action.yml](action.yml)): runs `aos review`, uploads the SARIF to code scanning, and runs `aos drift` when you give it a baseline.
@@ -123,7 +123,7 @@ jobs:
       - uses: actions/checkout@v7   # pin to a commit SHA
         with:
           persist-credentials: false
-      - uses: basitalisandhu/agent-off-switch@v0.1.0   # pin to a commit SHA
+      - uses: basitalisandhu/agent-off-switch@v0.1.1   # pin to a commit SHA
         with:
           exports: exports/            # the folder your export job writes
           baseline: inventory/last.json
