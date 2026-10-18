@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agent-off-switch"
-version = "0.1.0"
+version = "0.1.1"
 description = "Find every AI agent identity in Microsoft 365, AWS and GitHub from saved exports, see what it can reach, and print the runbook to switch it off."
 readme = "README.md"
 requires-python = ">=3.10"
