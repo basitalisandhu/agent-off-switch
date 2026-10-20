@@ -4,6 +4,17 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 ## [Unreleased]
 
+### Fixed
+
+- `aos off` no longer suggests an unrelated identity for an unknown name; only close names are offered (#12).
+- An export record of the wrong shape (for example a string where Graph returns a list) now ends with a clear error and exit code 2 instead of a Python traceback.
+- Out-of-range dates and timestamps in exports are read as "no date" instead of crashing.
+- Carriage returns in names no longer break Markdown table rows.
+
+### Added
+
+- Property tests with Hypothesis for the date, record, masking and table helpers, and for every command on malformed copies of the demo tenant.
+
 ## [0.1.1] - 2026-10-18
 
 ### Added
