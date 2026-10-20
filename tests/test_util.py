@@ -46,3 +46,12 @@ def test_tag_owner_reads_aws_and_entra_tags():
     assert tag_owner([{"Key": "Owner", "Value": "team@example.com"}]) == "team@example.com"
     assert tag_owner(["owner:team@example.com"]) == "team@example.com"
     assert tag_owner(["other"]) == ""
+
+
+def test_parse_dt_out_of_range_is_no_date():
+    for value in (10**20, -(10**20), 1e308, float("nan"), float("inf"), "9999-12-31T23:59:59-01:00"):
+        assert parse_dt(value) is None
+
+
+def test_cell_removes_carriage_returns():
+    assert cell("a\r\nb\rc|d") == "a b c\\|d"

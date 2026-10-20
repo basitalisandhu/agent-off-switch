@@ -65,7 +65,10 @@ def parse_dt(value) -> datetime | None:
     if value is None or value == "":
         return None
     if isinstance(value, (int, float)) and not isinstance(value, bool):
-        return datetime.fromtimestamp(value / 1000 if value > 10**11 else value, tz=timezone.utc)
+        try:
+            return datetime.fromtimestamp(value / 1000 if abs(value) > 10**11 else value, tz=timezone.utc)
+        except (OverflowError, OSError, ValueError):  # out of range or NaN: treat as no date
+            return None
     text = str(value).strip()
     if text.lower() in NO_VALUE:
         return None
@@ -77,7 +80,10 @@ def parse_dt(value) -> datetime | None:
             dt = datetime.combine(date.fromisoformat(text[:10]), datetime.min.time())
         except ValueError:
             return None
-    return dt.replace(tzinfo=timezone.utc) if dt.tzinfo is None else dt.astimezone(timezone.utc)
+    try:
+        return dt.replace(tzinfo=timezone.utc) if dt.tzinfo is None else dt.astimezone(timezone.utc)
+    except OverflowError:  # an offset that moves the date outside years 1 to 9999
+        return None
 
 
 def iso(dt: datetime | None) -> str | None:
@@ -105,8 +111,9 @@ def mask(value) -> str:
 
 
 def cell(value) -> str:
-    """A Markdown table cell: pipes escaped, newlines removed, '-' for nothing."""
-    return str(value if value not in (None, "", []) else "-").replace("|", "\\|").replace("\n", " ")
+    """A Markdown table cell: pipes escaped, line breaks removed, '-' for nothing."""
+    text = str(value if value not in (None, "", []) else "-")
+    return text.replace("|", "\\|").replace("\r\n", " ").replace("\n", " ").replace("\r", " ")
 
 
 def tag_owner(tags) -> str:
