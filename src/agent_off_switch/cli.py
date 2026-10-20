@@ -11,6 +11,9 @@ from . import __version__, drift, inventory, review, runbook
 from .exports import find_identity
 from .util import InputError, as_of, write_text
 
+# How alike a name must be to be offered as "did you mean" (difflib ratio; 0.6 is the difflib default).
+SUGGEST_CUTOFF = 0.6
+
 EXIT_HELP = "Exit codes: 0 nothing to act on, 1 something needs a person, 2 bad input."
 
 
@@ -107,8 +110,8 @@ def run(args) -> int:
         inv = _load(args.exports, args)
         ident = find_identity({i.id: i for i in inv.identities}, args.identity)
         if ident is None:
-            names = [i.id for i in inv.identities] + [i.name for i in inv.identities]
-            near = difflib.get_close_matches(args.identity, names, n=3, cutoff=0.4)
+            names = list(dict.fromkeys([i.id for i in inv.identities] + [i.name for i in inv.identities]))
+            near = difflib.get_close_matches(args.identity, names, n=3, cutoff=SUGGEST_CUTOFF)
             hint = f"; did you mean {', '.join(near)}?" if near else "; run aos inventory to list identities"
             raise InputError(f"no identity {args.identity!r} in {args.exports}{hint}")
         rb = runbook.runbook(ident)

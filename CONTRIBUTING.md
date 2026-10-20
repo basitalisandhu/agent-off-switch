@@ -32,6 +32,8 @@ python -m pytest -q
 aos review examples/demo-tenant
 ```
 
+`tests/test_properties.py` uses [Hypothesis](https://hypothesis.readthedocs.io/) (installed by `.[dev]`) to feed the parsers random values and to run every command on copies of the demo tenant with values of the wrong type. A new reader should keep that test passing: bad input ends with exit code 2 and a message, never a traceback.
+
 ## Pull requests
 
 - One topic per pull request; say what changed, why, and how you tested it.

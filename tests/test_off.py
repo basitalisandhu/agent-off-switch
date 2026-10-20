@@ -119,3 +119,16 @@ def test_off_runs_nothing(demo, monkeypatch, capsys):
 def test_off_finds_identity_by_app_or_object_id(demo, value, capsys):
     assert cli.main(["off", str(demo), value, "--as-of", AS_OF]) == 0
     assert "mail-triage-agent" in capsys.readouterr().out
+
+
+def test_cli_off_unrelated_name_gets_no_suggestion(demo, capsys):
+    # Issue #12: a name like nothing in the tenant must not be "corrected" to an unrelated identity.
+    assert cli.main(["off", str(demo), "nosuch"]) == 2
+    err = capsys.readouterr().err
+    assert "did you mean" not in err and "run aos inventory" in err
+
+
+def test_cli_off_one_letter_typo_still_suggests(demo, capsys):
+    assert cli.main(["off", str(demo), "coding-agent-runer"]) == 2
+    err = capsys.readouterr().err
+    assert "did you mean" in err and "coding-agent-runner" in err

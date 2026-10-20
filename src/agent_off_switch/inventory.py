@@ -91,6 +91,17 @@ def evaluate(ident: Identity, as_of: datetime, unused_days: int, max_age: int) -
     ident.flags = flags
 
 
+def _read(platform: str, reader, *args) -> None:
+    """Run one export reader; a record of the wrong shape becomes a clear input error instead of a traceback."""
+    try:
+        reader(*args)
+    except (AttributeError, IndexError, KeyError, TypeError) as exc:
+        raise InputError(
+            f"{platform} exports: a record has an unexpected shape ({type(exc).__name__}: {exc}); "
+            "re-export it with the command in docs/exports.md"
+        ) from exc
+
+
 def build(
     folder: Path,
     as_of: datetime,
@@ -107,10 +118,10 @@ def build(
         raise InputError(f"{folder}: none of the expected export files is present (see docs/exports.md)")
     inv: dict[str, Identity] = {}
     notes: list[str] = []
-    read_entra(folder, inv, notes)
-    read_aws(folder, inv, notes, include_aws_managed_roles)
-    read_github(folder, inv)
-    read_register(folder, inv)
+    _read("Entra", read_entra, folder, inv, notes)
+    _read("AWS", read_aws, folder, inv, notes, include_aws_managed_roles)
+    _read("GitHub", read_github, folder, inv)
+    _read("register", read_register, folder, inv)
     identities = []
     for key in sorted(inv):
         ident = score_identity(inv[key])
