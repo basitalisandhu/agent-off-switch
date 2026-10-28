@@ -4,6 +4,13 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-10-29
+
+### Fixed
+
+- Deeply nested JSON in an export file exits 2 naming the file on every supported Python. Python 3.14 no longer raises `RecursionError` from `json.loads` at the old depth (balanced input parsed, unclosed input was reported as invalid JSON instead), so JSON is now checked for nesting first (limit 200 levels).
+- CI tests Python 3.14.
+
 ## [0.1.2] - 2026-10-28
 
 ### Fixed
@@ -50,7 +57,8 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 The export readers, scoring lists and runbook steps are adapted from the scripts in [agent-identity-governance-skills](https://github.com/basitalisandhu/agent-identity-governance-skills).
 
-[Unreleased]: https://github.com/basitalisandhu/agent-off-switch/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/basitalisandhu/agent-off-switch/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/basitalisandhu/agent-off-switch/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/basitalisandhu/agent-off-switch/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/basitalisandhu/agent-off-switch/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/basitalisandhu/agent-off-switch/releases/tag/v0.1.0

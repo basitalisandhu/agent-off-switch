@@ -97,16 +97,16 @@ $ echo $?
 From git (no dependencies at run time):
 
 ```bash
-pip install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.2"
+pip install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.3"
 aos --help
 ```
 
-If your system Python refuses `pip install` outside a virtual environment, use `pipx install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.2"` instead. `--as-of` defaults to today, so without it the demo's ages and "unused for N days" flags move with the calendar; that is why the examples pin it.
+If your system Python refuses `pip install` outside a virtual environment, use `pipx install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.3"` instead. `--as-of` defaults to today, so without it the demo's ages and "unused for N days" flags move with the calendar; that is why the examples pin it.
 
 Container image, built by [the release workflow](.github/workflows/publish-github-packages.yml) for each version tag, with an SPDX SBOM, build provenance and a keyless signature:
 
 ```bash
-docker run --rm -v "$PWD/exports:/work/exports:ro" ghcr.io/basitalisandhu/agent-off-switch:0.1.2 review exports
+docker run --rm -v "$PWD/exports:/work/exports:ro" ghcr.io/basitalisandhu/agent-off-switch:0.1.3 review exports
 ```
 
 GitHub Action ([action.yml](action.yml)): runs `aos review`, uploads the SARIF to code scanning, and runs `aos drift` when you give it a baseline.
@@ -123,7 +123,7 @@ jobs:
       - uses: actions/checkout@v7   # pin to a commit SHA
         with:
           persist-credentials: false
-      - uses: basitalisandhu/agent-off-switch@v0.1.2   # pin to a commit SHA
+      - uses: basitalisandhu/agent-off-switch@v0.1.3   # pin to a commit SHA
         with:
           exports: exports/            # the folder your export job writes
           baseline: inventory/last.json
@@ -174,7 +174,7 @@ Every message below is real `aos` output. Bad input always exits with code 2 and
 
 | You see | What it means | Fix |
 |---|---|---|
-| `error: externally-managed-environment` from `pip install` | Your system Python (Homebrew, Debian, Ubuntu) refuses installs outside a virtual environment. | Use a venv (`python3 -m venv .venv && . .venv/bin/activate`) or `pipx install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.2"`. |
+| `error: externally-managed-environment` from `pip install` | Your system Python (Homebrew, Debian, Ubuntu) refuses installs outside a virtual environment. | Use a venv (`python3 -m venv .venv && . .venv/bin/activate`) or `pipx install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.3"`. |
 | `aos review: examples/demo-tenant: no such folder or file` | The examples are not in the installed package. | Clone the repository and run the demo from its root, as in [the demo](#the-60-second-demo). |
 | `aos review: <folder>: none of the expected export files is present (see docs/exports.md)` | The folder has no file with a name `aos` reads. | Keep the file names from [docs/exports.md](docs/exports.md), for example `entra-applications.json`. |
 | `aos review: entra-applications.json: not valid JSON: ...` | The export is empty or was cut off. | Run the export command again; check the file ends with `}` or `]`. |

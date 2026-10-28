@@ -14,6 +14,8 @@ import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
 
+from . import _jsondepth
+
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 NO_VALUE = {"n/a", "no_information", "not_supported", "none", "null", "never"}
 
@@ -24,7 +26,7 @@ class InputError(Exception):
 
 def load_json(path: Path):
     try:
-        return json.loads(path.read_text(encoding="utf-8-sig"))
+        return _jsondepth.loads(path.read_text(encoding="utf-8-sig"))
     except OSError as exc:
         raise InputError(f"{path.name}: cannot read: {exc}") from exc
     except UnicodeDecodeError as exc:

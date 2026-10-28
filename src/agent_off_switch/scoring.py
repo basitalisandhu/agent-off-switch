@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 import re
 
+from . import _jsondepth
 from .model import Grant, Identity
 
 # ---- Microsoft Entra and Microsoft Graph -------------------------------------------------------------------------
@@ -160,8 +161,8 @@ def policy_document(doc) -> dict:
         if "%" in text and not text.lstrip().startswith("{"):
             text = re.sub(r"%([0-9A-Fa-f]{2})", lambda m: chr(int(m.group(1), 16)), text.replace("+", " "))
         try:
-            parsed = json.loads(text)
-        except json.JSONDecodeError:
+            parsed = _jsondepth.loads(text)
+        except (json.JSONDecodeError, RecursionError):
             return {}
         return parsed if isinstance(parsed, dict) else {}
     return {}
