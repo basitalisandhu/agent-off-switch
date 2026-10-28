@@ -63,6 +63,37 @@ jobs:
           set -e
           test "$code" = "1"
 
+  quickstart:
+    name: README quick start on a fresh install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Clone, install in a new venv and run the demo exactly as the README does
+        shell: bash
+        run: |
+          set -euo pipefail
+          work="$RUNNER_TEMP/newcomer"
+          git clone --quiet "$GITHUB_WORKSPACE" "$work/agent-off-switch"
+          cd "$work/agent-off-switch"
+          python3 -m venv .venv && . .venv/bin/activate && pip install --quiet .
+          aos review examples/demo-tenant --as-of 2026-10-09 > review.md || test $? = 1
+          grep -qx "## 4 agent identities nobody owns" review.md
+          grep -q "15 findings (8 error)" review.md
+          aos off examples/demo-tenant aws-role:coding-agent-runner --as-of 2026-10-09 > off.md
+          grep -q "^# Off-switch runbook: coding-agent-runner" off.md
+          grep -q "Every credential and grant in the exports is named by a step." off.md
+          set +e
+          aos drift examples/drift/baseline.json examples/demo-tenant --as-of 2026-10-09 --accept examples/drift/accepted.txt > drift.md
+          code=$?
+          set -e
+          test "$code" = "1"
+          grep -q "4 changes, 3 not reviewed" drift.md
+
   container-build:
     name: Build the container image and run it
     runs-on: ubuntu-latest

@@ -27,8 +27,12 @@ def load_json(path: Path):
         return json.loads(path.read_text(encoding="utf-8-sig"))
     except OSError as exc:
         raise InputError(f"{path.name}: cannot read: {exc}") from exc
+    except UnicodeDecodeError as exc:
+        raise InputError(f"{path.name}: not UTF-8 text (save the export as UTF-8 JSON): {exc}") from exc
     except json.JSONDecodeError as exc:
         raise InputError(f"{path.name}: not valid JSON: {exc}") from exc
+    except RecursionError as exc:
+        raise InputError(f"{path.name}: JSON nested too deeply to read") from exc
 
 
 def load_csv(path: Path) -> list[dict[str, str]]:
@@ -87,7 +91,9 @@ def parse_dt(value) -> datetime | None:
 
 
 def iso(dt: datetime | None) -> str | None:
-    return dt.strftime("%Y-%m-%dT%H:%M:%SZ") if dt else None
+    # Not strftime("%Y"): glibc does not zero-pad years below 1000, so "999-01-01"
+    # would come out and fail to parse back. Pad the year by hand.
+    return f"{dt.year:04d}-{dt:%m-%dT%H:%M:%S}Z" if dt else None
 
 
 def as_of(value: str | None) -> datetime:
