@@ -4,6 +4,25 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-10-28
+
+### Fixed
+
+- `aos off` no longer suggests an unrelated identity for an unknown name; only close names are offered (#12).
+- An export record of the wrong shape (for example a string where Graph returns a list) now ends with a clear error and exit code 2 instead of a Python traceback.
+- Out-of-range dates and timestamps in exports are read as "no date" instead of crashing.
+- Carriage returns in names no longer break Markdown table rows.
+- An export that is not UTF-8 (for example UTF-16 from Windows PowerShell 5.1) or JSON nested too deeply now ends with exit code 2 and a message naming the file, instead of a traceback.
+- Dates before the year 1000 were written without a four-digit year on Linux and could not be read back.
+
+### Added
+
+- Property tests with Hypothesis for the date, record, masking and table helpers, and for every command on malformed copies of the demo tenant.
+- A seeded fuzz test that replaces each export file with empty, truncated, non-UTF-8, deeply nested or random bytes and runs each command in a subprocess with a timeout.
+- A scaling test: the demo tenant copied 10 and 100 times; runtime must grow roughly linearly.
+- A CI job that clones the repository, installs it in a new venv and runs the README quick start.
+- A Troubleshooting section in the README with real error messages and fixes.
+
 ## [0.1.1] - 2026-10-18
 
 ### Added
@@ -31,6 +50,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 The export readers, scoring lists and runbook steps are adapted from the scripts in [agent-identity-governance-skills](https://github.com/basitalisandhu/agent-identity-governance-skills).
 
-[Unreleased]: https://github.com/basitalisandhu/agent-off-switch/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/basitalisandhu/agent-off-switch/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/basitalisandhu/agent-off-switch/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/basitalisandhu/agent-off-switch/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/basitalisandhu/agent-off-switch/releases/tag/v0.1.0

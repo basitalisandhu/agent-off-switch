@@ -97,16 +97,16 @@ $ echo $?
 From git (no dependencies at run time):
 
 ```bash
-pip install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.1"
+pip install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.2"
 aos --help
 ```
 
-If your system Python refuses `pip install` outside a virtual environment, use `pipx install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.1"` instead. `--as-of` defaults to today, so without it the demo's ages and "unused for N days" flags move with the calendar; that is why the examples pin it.
+If your system Python refuses `pip install` outside a virtual environment, use `pipx install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.2"` instead. `--as-of` defaults to today, so without it the demo's ages and "unused for N days" flags move with the calendar; that is why the examples pin it.
 
 Container image, built by [the release workflow](.github/workflows/publish-github-packages.yml) for each version tag, with an SPDX SBOM, build provenance and a keyless signature:
 
 ```bash
-docker run --rm -v "$PWD/exports:/work/exports:ro" ghcr.io/basitalisandhu/agent-off-switch:0.1.1 review exports
+docker run --rm -v "$PWD/exports:/work/exports:ro" ghcr.io/basitalisandhu/agent-off-switch:0.1.2 review exports
 ```
 
 GitHub Action ([action.yml](action.yml)): runs `aos review`, uploads the SARIF to code scanning, and runs `aos drift` when you give it a baseline.
@@ -123,7 +123,7 @@ jobs:
       - uses: actions/checkout@v7   # pin to a commit SHA
         with:
           persist-credentials: false
-      - uses: basitalisandhu/agent-off-switch@v0.1.1   # pin to a commit SHA
+      - uses: basitalisandhu/agent-off-switch@v0.1.2   # pin to a commit SHA
         with:
           exports: exports/            # the folder your export job writes
           baseline: inventory/last.json
@@ -167,6 +167,22 @@ Exit codes: 0 nothing to act on, 1 something needs a person (findings at or abov
 ## Threat model
 
 [docs/threat-model.md](docs/threat-model.md) maps what `aos` covers to the [OWASP Top 10 for Agentic Applications](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/) (mainly ASI03 Identity & Privilege Abuse, with ASI02, ASI04, ASI05, ASI08 and ASI10) and to Microsoft's [Entra Agent ID](https://learn.microsoft.com/en-us/entra/agent-id/what-is-microsoft-entra-agent-id) guidance, and lists what the tool itself must not do.
+
+## Troubleshooting
+
+Every message below is real `aos` output. Bad input always exits with code 2 and names the file or option.
+
+| You see | What it means | Fix |
+|---|---|---|
+| `error: externally-managed-environment` from `pip install` | Your system Python (Homebrew, Debian, Ubuntu) refuses installs outside a virtual environment. | Use a venv (`python3 -m venv .venv && . .venv/bin/activate`) or `pipx install "git+https://github.com/basitalisandhu/agent-off-switch@v0.1.2"`. |
+| `aos review: examples/demo-tenant: no such folder or file` | The examples are not in the installed package. | Clone the repository and run the demo from its root, as in [the demo](#the-60-second-demo). |
+| `aos review: <folder>: none of the expected export files is present (see docs/exports.md)` | The folder has no file with a name `aos` reads. | Keep the file names from [docs/exports.md](docs/exports.md), for example `entra-applications.json`. |
+| `aos review: entra-applications.json: not valid JSON: ...` | The export is empty or was cut off. | Run the export command again; check the file ends with `}` or `]`. |
+| `aos review: entra-applications.json: not UTF-8 text (save the export as UTF-8 JSON): ...` | Windows PowerShell 5.1 `Out-File` and `>` write UTF-16. | Use `Out-File -Encoding utf8` or `Set-Content -Encoding utf8`, or PowerShell 7, which writes UTF-8 by default. |
+| `aos off: no identity 'nosuch' in examples/demo-tenant; run aos inventory to list identities` | The name or id matches nothing. When a close name exists, `aos` suggests it. | Run `aos inventory <folder>` and copy the id from the first column. |
+| `aos review: --as-of '10/09/2026' is not YYYY-MM-DD` | Dates are ISO 8601 only. | Use `--as-of 2026-10-09`. |
+| `aos review` exits 1 with no error message | Findings at or above `--fail-on` (default `error`): this is the CI gate working. | Read the report, or pass `--fail-on none` to always exit 0. |
+| The demo's ages and "unused for N days" flags differ from this README | `--as-of` defaults to today. | Pin it: `--as-of 2026-10-09`. |
 
 ## FAQ
 
