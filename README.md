@@ -7,7 +7,7 @@
 [![CI](https://github.com/basitalisandhu/agent-off-switch/actions/workflows/ci.yml/badge.svg)](https://github.com/basitalisandhu/agent-off-switch/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Copilot agents, MCP connectors and coding agents run as Entra app registrations, managed identities, AWS IAM roles, access keys and GitHub Apps. `aos` reads saved exports of those, puts every agent identity in one table with its owner, credentials, grants and last use, ranks what it can reach, and prints the exact steps to switch one off.
+Copilot agents, MCP connectors and coding agents run as Entra app registrations, managed identities, AWS IAM roles, access keys and GitHub Apps. `aos` reads saved exports of those, puts every agent identity in one table with its owner, credentials, grants and last use, ranks what it can reach, and prints the exact steps to switch one off. It is for the security, platform or identity engineer who runs access reviews or incident response across those platforms and needs one list and a quick way to stop an agent.
 
 - **`aos inventory`**: every non-human identity, with the ones that look like agents marked; flags ownerless identities, identities unused for N days and credentials older than 90 days. Markdown, CSV or JSON.
 - **`aos review`**: findings ranked by blast radius, each with its fix. Markdown, JSON or SARIF for GitHub code scanning.
@@ -198,7 +198,7 @@ Every message below is real `aos` output. Bad input always exits with code 2 and
 
 **How do I gate pull requests on new agent identities?** Commit an inventory (`aos inventory exports --format json --out inventory/last.json`), run `aos drift inventory/last.json exports` in CI, and add reviewed keys to an accept file.
 
-**Does it work on Windows?** Yes; CI runs the tests on Ubuntu, macOS and Windows with Python 3.10 to 3.13.
+**Does it work on Windows?** Yes; CI runs the tests on Ubuntu, macOS and Windows with Python 3.10 to 3.14.
 
 ## Related repositories
 

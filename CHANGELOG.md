@@ -4,6 +4,11 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 ## [Unreleased]
 
+### Changed
+
+- The README says who the tool is for, and the FAQ lists Python 3.14, which CI already tests.
+- ROADMAP.md no longer lists #12 under Now; it was fixed in 0.1.2.
+
 ## [0.1.3] - 2026-10-29
 
 ### Fixed
