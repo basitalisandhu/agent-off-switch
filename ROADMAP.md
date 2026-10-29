@@ -4,7 +4,7 @@ This is what we are working on and what we would like help with, in plain order.
 
 ## Now
 
-- [#12](https://github.com/basitalisandhu/agent-off-switch/issues/12): `aos off` suggests an unrelated identity for an unknown name
+- Nothing claimed yet. [#12](https://github.com/basitalisandhu/agent-off-switch/issues/12) (`aos off` suggested an unrelated identity for an unknown name) was fixed in 0.1.2.
 
 ## Next
 
